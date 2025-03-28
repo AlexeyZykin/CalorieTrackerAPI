@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "b9fb6da4-908d-4a8a-859c-3a62bbeff376",
+		"name": "calorie-tracker-api",
+		"description": "REST API сервис для отслеживания дневной нормы калорий пользователя и учета съеденных блюд.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39792167"
+	},
+	"item": [
+		{
+			"name": "create_user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_id\": null,\r\n  \"name\": \"Alexey\",\r\n  \"email\": \"alexis@gmail.com\",\r\n  \"age\": 25,\r\n  \"weight\": 65.0,\r\n  \"height\": 172.0,\r\n  \"user_goal\": \"WEIGHT_LOSS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/v1/calorietracker/user",
+				"description": "Описание: метод создает нового пользователя.\n\nПримечания:\n\nuser_goal может быть следующих значений: \"weight_loss\", \"weight_maintenance\", \"weight_gain\"\n\nВозможные статус коды:\n\n400 Bad Request - ошибка валидации либо user уже существует\n\n201 Created"
+			},
+			"response": []
+		},
+		{
+			"name": "create_meal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"meal_id\": null,\r\n    \"name\": \"Пельмени\",\r\n    \"calories_per_serving\": 2000.0,\r\n    \"proteins\": 17.6,\r\n    \"fats\": 12.7,\r\n    \"carbohydrates\": 23.2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/v1/calorietracker/meal",
+				"description": "Описание: создание нового пользователя\n\nВозможные статус коды:\n\n400 Bad Request - ошибка валидации либо блюдо уже существует\n\n201 Created"
+			},
+			"response": []
+		},
+		{
+			"name": "create_meal_intake",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1,\r\n    \"meal_ids\": [ 1 ],\r\n    \"date\": \"2023-03-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/v1/calorietracker/mealintake",
+				"description": "Описание: создание приема пищи\n\nПримечания: паттерн для даты \"yyyy-MM-dd\"\n\nВозможные статус коды:\n\n400 Bad Request - ошибка валидации, пользователь не найден, блюдо не найдено\n\n201 Created - прием пищи создан"
+			},
+			"response": []
+		},
+		{
+			"name": "daily_report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/calorietracker/report/daily?user_id=1&date=2023-03-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"calorietracker",
+						"report",
+						"daily"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "date",
+							"value": "2023-03-01"
+						}
+					]
+				},
+				"description": "Описание: получить отчет за день с суммой всех калорий и счетчиком приемов пищи\n\nПримечания: паттерн для даты \"yyyy-MM-dd\""
+			},
+			"response": []
+		},
+		{
+			"name": "check_daily_goal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/calorietracker/report/checkgoal?user_id=1&date=2023-03-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"calorietracker",
+						"report",
+						"checkgoal"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "date",
+							"value": "2023-03-01"
+						}
+					]
+				},
+				"description": "Описание: проверка, уложился ли пользователь в свою дневную норму калорий.\n\nПримечания: паттерн для даты \"yyyy-MM-dd\""
+			},
+			"response": []
+		},
+		{
+			"name": "meal_intake_history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/calorietracker/report/history?user_id=1&start_date=2023-03-01&end_date=2023-04-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"calorietracker",
+						"report",
+						"history"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "start_date",
+							"value": "2023-03-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2023-04-01"
+						}
+					]
+				},
+				"description": "Описание: история питания по дням"
+			},
+			"response": []
+		}
+	]
+}
