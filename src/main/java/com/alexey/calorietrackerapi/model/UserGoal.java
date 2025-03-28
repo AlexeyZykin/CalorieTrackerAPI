@@ -9,7 +9,7 @@ public enum UserGoal {
         return switch (this) {
             case WEIGHT_LOSS -> 0.85;
             case WEIGHT_MAINTENANCE -> 1.0;
-            case WEIGHT_GAIN -> 1.15;
+            case WEIGHT_GAIN -> 1.2;
         };
     }
 }

@@ -8,7 +8,7 @@ import jakarta.validation.constraints.*;
 public record MealDto(
 
         @NotNull(groups = OnUpdate.class)
-        @Null(groups = OnCreate.class)
+        @Null(groups = OnCreate.class, message = "Id блюда при создании должен быть null")
         @JsonProperty("meal_id")
         Long mealId,
 

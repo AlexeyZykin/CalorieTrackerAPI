@@ -28,8 +28,7 @@ public class UserMapper {
                 dto.age(),
                 dto.weight(),
                 dto.height(),
-                UserGoalMapper.fromDtoToModel(dto.userGoalDto()),
-                null
+                UserGoalMapper.fromDtoToModel(dto.userGoalDto())
         );
     }
 
@@ -53,8 +52,7 @@ public class UserMapper {
                 entity.getAge(),
                 entity.getWeight(),
                 entity.getHeight(),
-                UserGoalMapper.fromEntityToModel(entity.getUserGoalEntity()),
-                MealIntakeMapper.toModelList(entity.getMealIntakes())
+                UserGoalMapper.fromEntityToModel(entity.getUserGoalEntity())
         );
     }
 }

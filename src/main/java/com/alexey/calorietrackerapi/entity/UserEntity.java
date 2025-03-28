@@ -39,8 +39,4 @@ public class UserEntity {
     @Column(name = "user_goal")
     @Enumerated(EnumType.STRING)
     private UserGoalEntity userGoalEntity;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<MealIntakeEntity> mealIntakes;
-
 }

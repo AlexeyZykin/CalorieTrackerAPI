@@ -11,8 +11,7 @@ public record User(
         int age,
         double weight,
         double height,
-        UserGoal userGoal,
-        List<MealIntake> mealIntakeList
+        UserGoal userGoal
 
 ) {
     public Double calculateDailyCalorieNorm() {

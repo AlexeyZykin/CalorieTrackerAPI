@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 
 public record UserDto(
-        @NotNull(groups = OnUpdate.class)
-        @Null(groups = OnCreate.class)
+        @NotNull(groups = OnUpdate.class, message = "При обновлении Id не может быть null")
+        @Null(groups = OnCreate.class, message = "Id пользователя при создании должен быть null")
         @JsonProperty("user_id")
         Long userId,
 

@@ -4,6 +4,7 @@ import com.alexey.calorietrackerapi.dto.MealIntakeResponse;
 import com.alexey.calorietrackerapi.entity.MealIntakeEntity;
 import com.alexey.calorietrackerapi.model.MealIntake;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MealIntakeMapper {
@@ -19,7 +20,7 @@ public class MealIntakeMapper {
 
     public static MealIntakeEntity toEntity(MealIntake model) {
         return new MealIntakeEntity(
-                null,
+                model.mealIntakeId(),
                 UserMapper.toEntity(model.user()),
                 model.meals().stream().map(MealMapper::toEntity).toList(),
                 model.date()
@@ -27,6 +28,7 @@ public class MealIntakeMapper {
     }
 
     public static List<MealIntake> toModelList(List<MealIntakeEntity> entities) {
+        if (entities == null) return Collections.emptyList();
         return entities.stream().map(MealIntakeMapper::toModel).toList();
     }
 

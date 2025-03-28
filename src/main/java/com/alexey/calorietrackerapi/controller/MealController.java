@@ -6,15 +6,19 @@ import com.alexey.calorietrackerapi.exception.MealAlreadyExistsException;
 import com.alexey.calorietrackerapi.mapper.MealMapper;
 import com.alexey.calorietrackerapi.model.Meal;
 import com.alexey.calorietrackerapi.service.MealService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/calorie-tracker/meal")
+@RequestMapping("/v1/calorietracker/meal")
+@Validated
 public class MealController {
 
     private final MealService mealService;
@@ -25,7 +29,7 @@ public class MealController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createMeal(MealDto mealDto) {
+    public ResponseEntity<String> createMeal(@Valid @RequestBody MealDto mealDto) {
         try {
             Meal createdMeal = mealService.createMeal(MealMapper.toModel(mealDto));
             MealDto responseMeal = MealMapper.toDto(createdMeal);

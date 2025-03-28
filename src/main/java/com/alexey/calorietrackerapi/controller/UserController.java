@@ -6,16 +6,17 @@ import com.alexey.calorietrackerapi.mapper.UserMapper;
 import com.alexey.calorietrackerapi.model.User;
 import com.alexey.calorietrackerapi.service.UserService;
 import com.alexey.calorietrackerapi.validation.OnCreate;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/calorie-tracker/user")
+@RequestMapping("/v1/calorietracker/user")
+@Validated
 public class UserController {
 
     private final UserService userService;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createUser(@Validated(OnCreate.class) UserDto userDto) {
+    public ResponseEntity<String> createUser(@Validated(OnCreate.class) @Valid @RequestBody UserDto userDto) {
         try {
             User createdUser = userService.createUser(UserMapper.toModel(userDto));
             UserDto responseUser = UserMapper.toDto(createdUser);
