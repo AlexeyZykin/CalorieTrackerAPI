@@ -52,8 +52,7 @@ class MealIntakeServiceTest {
                 25,
                 65.0,
                 175.0,
-                UserGoal.WEIGHT_MAINTENANCE,
-                null
+                UserGoal.WEIGHT_MAINTENANCE
         );
         Meal meal = new Meal(
                 null,

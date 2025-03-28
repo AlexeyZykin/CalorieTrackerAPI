@@ -63,8 +63,7 @@ class UserServiceTest {
                 25,
                 65.0,
                 175.0,
-                UserGoal.WEIGHT_MAINTENANCE,
-                null
+                UserGoal.WEIGHT_MAINTENANCE
         );
 
         var expected = user.email();
