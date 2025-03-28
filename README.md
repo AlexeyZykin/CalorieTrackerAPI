@@ -44,8 +44,6 @@ REST API сервис для отслеживания дневной нормы 
 ### Стек технологий:
 Java 21, Spring Boot, Spring Data, PostgreSQL, Testcontainers, JUnit, Mockito, Liquibase, Lombok
 
-### Postman Collection для тестирования API
-
 ### Инструкция по запуску
 Для запуска проекта выполните следующие шаги:
 1. Клонируйте репозиторий:
